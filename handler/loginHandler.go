@@ -23,14 +23,14 @@ func LoginHandler(context *gin.Context) {
 	// validate the loginObj for valid credential adn if these are valid then
 
 	var claims = &models.JwtClaims{}
-	claims.ComapnyId = "ComapnyId"
+	claims.CompanyId = "CompanyId"
 	claims.Username = loginObj.UserName
-	claims.Roles = []int{1,2,3}
+	claims.Roles = []int{1, 2, 3}
 	claims.Audience = context.Request.Header.Get("Referer") // get it from Referer header
 
 	var tokenCreationTime = time.Now().UTC()
 	var expirationTime = tokenCreationTime.Add(time.Duration(2) * time.Hour)
-	tokeString, err := token.GenrateToken(claims, expirationTime)
+	tokenString, err := token.GenrateToken(claims, expirationTime)
 
 	if err != nil {
 		badRequest(context, http.StatusBadRequest, "error in gerating token", []models.ErrorDetail{
@@ -41,5 +41,5 @@ func LoginHandler(context *gin.Context) {
 		})
 	}
 
-	ok(context, http.StatusOK, "token created", tokeString)
+	ok(context, http.StatusOK, "token created", tokenString)
 }

@@ -16,7 +16,7 @@ const (
 func GenrateToken(claims *models.JwtClaims, expirationTime time.Time) (string, error) {
 
 	claims.ExpiresAt = expirationTime.Unix()
-	claims.IssuedAt = time.Now().UTC().Unix()
+	claims.IssuedAt = time.Now().Unix()
 	claims.Issuer = ip
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
@@ -28,7 +28,6 @@ func GenrateToken(claims *models.JwtClaims, expirationTime time.Time) (string, e
 	}
 	return tokenString, nil
 }
-
 
 func VerifyToken(tokenString, origin string) (bool, *models.JwtClaims) {
 	claims := &models.JwtClaims{}
