@@ -22,7 +22,6 @@ func ReturnUnauthorized(context *gin.Context) {
 	})
 }
 
-
 func ValidateToken() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		tokenString := context.Request.Header.Get("apikey")
@@ -34,7 +33,7 @@ func ValidateToken() gin.HandlerFunc {
 		if len(context.Keys) == 0 {
 			context.Keys = make(map[string]interface{})
 		}
-		context.Keys["ComapnyId"] = claims.ComapnyId
+		context.Keys["CompanyId"] = claims.CompanyId
 		context.Keys["Username"] = claims.Username
 		context.Keys["Roles"] = claims.Roles
 
