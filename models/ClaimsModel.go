@@ -18,7 +18,7 @@ type JwtClaims struct {
 const ip = "192.168.0.107"
 
 func (claims JwtClaims) Valid() error {
-	var now = time.Now().UTC().Unix()
+	var now = time.Now().Unix()
 	if claims.VerifyExpiresAt(now, true) && claims.VerifyIssuer(ip, true) {
 		return nil
 	}
